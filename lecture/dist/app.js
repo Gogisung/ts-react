@@ -77,7 +77,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/dist";
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -86,15 +86,15 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./WordRelay.tsx":
-/*!***********************!*\
-  !*** ./WordRelay.tsx ***!
-  \***********************/
+/***/ "./RSP.tsx":
+/*!*****************!*\
+  !*** ./RSP.tsx ***!
+  \*****************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nexports.__esModule = true;\r\nvar React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\r\nvar react_1 = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\r\nvar WordRelay = function () {\r\n    var _a = react_1.useState('고고싱'), word = _a[0], setWord = _a[1];\r\n    var _b = react_1.useState(''), value = _b[0], setValue = _b[1];\r\n    var _c = react_1.useState(''), result = _c[0], setResult = _c[1];\r\n    var inputEl = react_1.useRef(null);\r\n    var onSubmitForm = react_1.useCallback(function (e) {\r\n        e.preventDefault();\r\n        var input = inputEl.current;\r\n        if (word[word.length - 1] === value[0]) {\r\n            setResult('오케이');\r\n            setWord(value);\r\n            setValue('');\r\n            if (input) {\r\n                input.focus();\r\n            }\r\n        }\r\n        else {\r\n            setResult('떙');\r\n            setValue('');\r\n            if (input) {\r\n                input.focus();\r\n            }\r\n        }\r\n    }, [value]);\r\n    var onChange = react_1.useCallback(function (e) {\r\n        setValue(e.currentTarget.value);\r\n    }, []);\r\n    return (React.createElement(React.Fragment, null,\r\n        React.createElement(\"div\", null, word),\r\n        React.createElement(\"form\", { onSubmit: onSubmitForm },\r\n            React.createElement(\"input\", { ref: inputEl, value: value, onChange: onChange }),\r\n            React.createElement(\"button\", null, \"\\uC785\\uB825!\")),\r\n        React.createElement(\"div\", null, result)));\r\n};\r\nexports[\"default\"] = WordRelay;\r\n\n\n//# sourceURL=webpack:///./WordRelay.tsx?");
+eval("\r\nexports.__esModule = true;\r\nvar React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\r\nvar react_1 = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\r\nvar rspCoords = {\r\n    바위: '0',\r\n    가위: '-142px',\r\n    보: '-284px'\r\n};\r\nvar scores = {\r\n    가위: 1,\r\n    바위: 0,\r\n    보: -1\r\n};\r\nvar computerChoice = function (imgCoords) {\r\n    return Object.keys(rspCoords).find(function (k) {\r\n        return rspCoords[k] === imgCoords;\r\n    });\r\n};\r\nvar RSP = function () {\r\n    var _a = react_1.useState(''), result = _a[0], setResult = _a[1];\r\n    var _b = react_1.useState(rspCoords.바위), imgCoord = _b[0], setImgCoord = _b[1];\r\n    var _c = react_1.useState(0), score = _c[0], setScore = _c[1];\r\n    var interval = react_1.useRef();\r\n    react_1.useEffect(function () {\r\n        console.log('다시 실행');\r\n        interval.current = window.setInterval(changeHand, 100);\r\n        return function () {\r\n            console.log('종료');\r\n            clearInterval(interval.current);\r\n        };\r\n    }, [imgCoord]);\r\n    var changeHand = function () {\r\n        if (imgCoord === rspCoords.바위) {\r\n            setImgCoord(rspCoords.가위);\r\n        }\r\n        else if (imgCoord === rspCoords.가위) {\r\n            setImgCoord(rspCoords.보);\r\n        }\r\n        else if (imgCoord === rspCoords.보) {\r\n            setImgCoord(rspCoords.바위);\r\n        }\r\n    };\r\n    var onClickBtn = function (choice) { return function () {\r\n        clearInterval(interval.current);\r\n        var myScore = scores[choice];\r\n        var cpuScore = scores[computerChoice(imgCoord)];\r\n        var diff = myScore - cpuScore;\r\n        if (diff === 0) {\r\n            setResult('비겼습니다!');\r\n        }\r\n        else if ([-1, 2].includes(diff)) {\r\n            setResult('이겼습니다!');\r\n            setScore(function (prevScore) { return prevScore + 1; });\r\n        }\r\n        else {\r\n            setResult('졌습니다!');\r\n            setScore(function (prevScore) { return prevScore - 1; });\r\n        }\r\n        setTimeout(function () {\r\n            interval.current = window.setInterval(changeHand, 100);\r\n        }, 1000);\r\n    }; };\r\n    return (React.createElement(React.Fragment, null,\r\n        React.createElement(\"div\", { id: \"computer\", style: { background: \"url(https://en.pimg.jp/023/182/267/1/23182267.jpg) \" + imgCoord + \" 0\" } }),\r\n        React.createElement(\"div\", null,\r\n            React.createElement(\"button\", { id: \"rock\", className: \"btn\", onClick: onClickBtn('바위') }, \"\\uBC14\\uC704\"),\r\n            React.createElement(\"button\", { id: \"scissor\", className: \"btn\", onClick: onClickBtn('가위') }, \"\\uAC00\\uC704\"),\r\n            React.createElement(\"button\", { id: \"paper\", className: \"btn\", onClick: onClickBtn('보') }, \"\\uBCF4\")),\r\n        React.createElement(\"div\", null, result),\r\n        React.createElement(\"div\", null,\r\n            \"\\uD604\\uC7AC \",\r\n            score,\r\n            \"\\uC810\")));\r\n};\r\nexports[\"default\"] = RSP;\r\n\n\n//# sourceURL=webpack:///./RSP.tsx?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("\r\nexports.__esModule = true;\r\nvar React = __webpack_require__(/*! reac
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nexports.__esModule = true;\r\nvar React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\r\nvar ReactDOM = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\r\nvar root_1 = __webpack_require__(/*! react-hot-loader/root */ \"./node_modules/react-hot-loader/root.js\");\r\nvar WordRelay_1 = __webpack_require__(/*! ./WordRelay */ \"./WordRelay.tsx\");\r\nvar Hot = root_1.hot(WordRelay_1[\"default\"]); // HOC\r\nReactDOM.render(React.createElement(Hot, null), document.querySelector('#root'));\r\n\n\n//# sourceURL=webpack:///./client.tsx?");
+eval("\r\nexports.__esModule = true;\r\nvar React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\r\nvar ReactDOM = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\r\nvar root_1 = __webpack_require__(/*! react-hot-loader/root */ \"./node_modules/react-hot-loader/root.js\");\r\nvar RSP_1 = __webpack_require__(/*! ./RSP */ \"./RSP.tsx\");\r\nvar Hot = root_1.hot(RSP_1[\"default\"]); // HOC\r\nReactDOM.render(React.createElement(Hot, null), document.querySelector('#root'));\r\n\n\n//# sourceURL=webpack:///./client.tsx?");
 
 /***/ }),
 
