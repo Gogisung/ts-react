@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Td: FunctionComponent<Props> = ({ rowIndex, cellIndex, dispatch, cellData }) => {
-  console.log('td rendered');
+  // console.log('td rendered');
 
   const ref = useRef<[number?, number?, Dispatch<any>?, string?]>([]);
   useEffect(() => {

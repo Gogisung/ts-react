@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Tr: FunctionComponent<Props> = ({ rowData, rowIndex, dispatch }) => {
-  console.log('tr rendered');
+  // console.log('tr rendered');
 
   const ref = useRef<[string[]?, Dispatch<any>?, number?]>([]);
   useEffect(() => {
