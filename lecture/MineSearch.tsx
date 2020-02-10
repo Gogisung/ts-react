@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useEffect, useReducer, useMemo, Dispatch } from 'react';
-
+import { useEffect, useReducer, createContext, useMemo, Dispatch } from 'react';
+import Form from './Form';
 import {
   ReducerActions, START_GAME, OPEN_CELL, INCREMENT_TIMER, NORMALIZE_CELL,
   QUESTION_CELL, FLAG_CELL, CLICK_MINE,
@@ -17,6 +17,13 @@ export const CODE = {
   OPENED: 0, // 0 이상이면 다 opened
 } as const;
 
+export type Codes = typeof CODE[keyof typeof CODE];
+interface Context {
+    tableData: (typeof CODE[keyof typeof CODE])[][],
+    halted: boolean,
+    dispatch: Dispatch<ReducerActions>,
+}
+
 export const TableContext = createContext<Context>({
   tableData: [],
   halted: true,
@@ -24,7 +31,7 @@ export const TableContext = createContext<Context>({
 })
 
 interface ReducerState {
-  tableData: number[][],
+  tableData: (typeof CODE[keyof typeof CODE])[][],
   data: {
     row: number,
     cell: number,
