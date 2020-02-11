@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect, useReducer, createContext, useMemo, Dispatch } from 'react';
 import Form from './Form';
+import Table from './Table';
 import {
   ReducerActions, START_GAME, OPEN_CELL, INCREMENT_TIMER, NORMALIZE_CELL,
   QUESTION_CELL, FLAG_CELL, CLICK_MINE,
