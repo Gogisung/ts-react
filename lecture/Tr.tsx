@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { useContext, FunctionComponent, memo } from 'react';
+import { Dispatch, useContext, FC, memo } from 'react';
 import { TableContext } from './MineSearch';
 import Td from './Td';
 
 interface Props {
+  rowData: string[];
   rowIndex: number;
+  dispatch: Dispatch<any>;
 }
 
-const Tr: FunctionComponent<Props> = memo(({ rowIndex }) => {
+const Tr: FC<Props> = memo(({ rowData, rowIndex, dispatch }) => {
   const { tableData } = useContext(TableContext);
 
   return (
