@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import GameMatcher from './GameMatcher';
 
 const Games = () => {
   return (
@@ -16,9 +17,11 @@ const Games = () => {
       <div>
         <Switch>
           <Route exact path="/" component={GameMatcher} />
-          <Route path="/game/:name" render={() => <GameMatcher />} />
+          <Route path="/game/:name" render={(props) => <GameMatcher {...props} />} />
         </Switch>
       </div>
     </BrowserRouter>
   );
 }
+
+export default Games;

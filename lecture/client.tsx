@@ -1,9 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader/root';
+import { Provider } from 'react-redux';
 
-import MineSearch from './MineSearch';
+import store from './store';
+import App from './App';
 
-const Hot = hot(MineSearch); // HOC
+const Hot = hot(App); // HOC
 
-ReactDOM.render(<Hot />, document.querySelector('#root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <Hot />
+  </Provider>
+, document.querySelector('#root'));
