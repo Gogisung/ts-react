@@ -11,5 +11,6 @@ const Hot = hot(App); // HOC
 ReactDOM.render(
   <Provider store={store}>
     <Hot />
-  </Provider>
-, document.querySelector('#root'));
+  </Provider>,
+  document.querySelector('#root')
+);
