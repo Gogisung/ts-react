@@ -1,16 +1,14 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader/root';
-import { Provider } from 'react-redux';
-
-import store from './store';
 import App from './App';
+import { StoreProvider } from './Context';
 
 const Hot = hot(App); // HOC
 
 ReactDOM.render(
-  <Provider store={store}>
+  <StoreProvider store={store}>
     <Hot />
-  </Provider>,
+  </StoreProvider>,
   document.querySelector('#root')
 );
