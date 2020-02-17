@@ -8,20 +8,20 @@ const App = () => {
     const state = useLocalStore(() => ({
         name:'',
         password: '',
-        onChangeName: action(function() {
-
+        onChangeName: action(function(e) {
+            this.name = e.target.value;
         }),
-        onChangePassword: action(function() {
-
+        onChangePassword: action(function(e) {
+            this.password = e.target.value;
         }),
     }))
 
     const onLogIn = useCallback(() => {
         userStore.logIn({
-            nickname: 'gogo',
-            password: '비밀번호',
+            nickname: state.name,
+            password: state.password,
         });
-    },[]);
+    },[state.name, state.password]);
 
     const onLogout = useCallback(() => {
         userStore.logOut();

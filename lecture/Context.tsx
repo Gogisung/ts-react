@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createContext } from 'react';
+import { createContext, ReactElement, FC } from 'react';
 import { userStore, postStore } from './store';
 
 export const storeContext = createContext({
@@ -7,7 +7,10 @@ export const storeContext = createContext({
   postStore,
 });
 
-export const StoreProvider = ({ children }) => {
+interface Props {
+  children: ReactElement
+}
+export const StoreProvider: FC<Props> = ({ children }) => {
   return (
     <storeContext.Provider value={{ userStore, postStore }}>
       {children}
